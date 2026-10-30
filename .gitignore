@@ -1,0 +1,24 @@
+# dependencies
+/node_modules
+
+# next.js / opennext / wrangler
+/.next/
+/.open-next/
+/.wrangler/
+/out/
+next-env.d.ts
+*.tsbuildinfo
+
+# secrets: never commit these
+.dev.vars
+.env*
+!.dev.vars.example
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+/coverage
+
+# local editor / agent tooling
+/.claude/

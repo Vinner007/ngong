@@ -1,0 +1,39 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ngong",
+  "account_id": "9380e34ec70e3810a04d4936bca2659c",
+  // Custom entry: wraps the OpenNext handler and adds the RoomDO + API routes.
+  "main": "worker.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "ngong"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [{ "name": "ROOM", "class_name": "RoomDO" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["RoomDO"] }],
+  "ai": { "binding": "AI" },
+  // Per-IP limits. Campus Wi-Fi puts a whole lecture hall behind one IP,
+  // so these are generous; the strict per-device limits live inside RoomDO.
+  "ratelimits": [
+    { "name": "CREATE_ROOM_LIMITER", "namespace_id": "4101", "simple": { "limit": 5, "period": 60 } },
+    { "name": "READ_LIMITER", "namespace_id": "4102", "simple": { "limit": 600, "period": 60 } },
+    { "name": "WRITE_LIMITER", "namespace_id": "4103", "simple": { "limit": 300, "period": 60 } }
+  ],
+  "vars": {
+    "ENVIRONMENT": "production"
+  },
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  }
+}

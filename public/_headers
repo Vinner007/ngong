@@ -1,0 +1,6 @@
+# Static files are served by Cloudflare before the worker runs, so they get their headers here.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Frame-Options: DENY

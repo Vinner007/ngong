@@ -1,0 +1,65 @@
+{
+  "course": "Web Programming: React เบื้องต้น",
+  "topics": [
+    {
+      "name": "useEffect dependency array",
+      "questions": [
+        "useEffect มันรันกี่รอบกันแน่ งงมาก",
+        "ทำไม useEffect รันซ้ำทุกครั้งที่ render",
+        "dependency array ใน useEffect ใส่อะไรบ้าง",
+        "ถ้าไม่ใส่ [] ท้าย useEffect จะเกิดอะไรขึ้น",
+        "useEffect ลูปไม่หยุดเลยครับ เกิดจากอะไร"
+      ]
+    },
+    {
+      "name": "useState updates are async",
+      "questions": [
+        "setState แล้วทำไมค่ายังเป็นค่าเก่า",
+        "กด setCount แล้ว console.log ออกมาไม่เปลี่ยน",
+        "useState อัปเดตไม่ทันที เพราะอะไร",
+        "ทำไมต้องใช้ prev => prev + 1 แทน count + 1",
+        "state เปลี่ยนแต่ตัวแปรยังเก่าอยู่ งงค่ะ"
+      ]
+    },
+    {
+      "name": "async/await vs Promise",
+      "questions": [
+        "async await กับ .then ต่างกันยังไง",
+        "await ใช้นอก async function ได้ไหม",
+        "Promise คืออะไร ยังไม่เข้าใจเลย",
+        "fetch แล้วได้ Promise { <pending> } ออกมา",
+        "ทำไมต้อง await ก่อน res.json()"
+      ]
+    },
+    {
+      "name": "Flexbox alignment",
+      "questions": [
+        "justify-content กับ align-items ต่างกันยังไง",
+        "จัด div ให้อยู่ตรงกลางจอด้วย flex ไม่ได้",
+        "flex-direction column แล้ว align กลับด้านงง",
+        "ทำไม align-items center แล้วไม่อยู่กลางแนวตั้ง",
+        "gap กับ margin ใน flexbox ควรใช้อันไหน"
+      ]
+    },
+    {
+      "name": "CORS error",
+      "questions": [
+        "เรียก API แล้วติด CORS error แก้ยังไง",
+        "CORS คืออะไร ทำไม browser บล็อก",
+        "ใน Postman ยิงได้ แต่บนเว็บติด CORS",
+        "Access-Control-Allow-Origin ต้องตั้งที่ไหน",
+        "ทำไม fetch ไป API คนอื่นแล้วโดน blocked by CORS policy"
+      ]
+    },
+    {
+      "name": "key prop in lists",
+      "questions": [
+        "ทำไม map ใน React ต้องใส่ key",
+        "warning each child in a list should have a unique key คืออะไร",
+        "ใช้ index เป็น key ได้ไหม",
+        "key ซ้ำกันแล้วจะพังยังไง",
+        "key ใน list มีไว้ทำอะไรครับ"
+      ]
+    }
+  ]
+}

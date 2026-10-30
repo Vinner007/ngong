@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Components only use these names (bg-surface, text-muted, ...), never raw hex,
+ * so light mode, dark mode and the always-dark projector screen come from one place.
+ * Text colours are chosen to pass WCAG 2.2 AA (4.5:1) on their usual background.
+ */
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-hover: #f1f5f9;
+  --text: #0f172a;
+  --muted: #475569;
+  --border: #e2e8f0;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-fg: #ffffff;
+  --primary-soft: #eef2ff;
+  --danger: #be123c;
+  --danger-soft: #fff1f2;
+  --level-low: #0f766e;
+  --level-medium: #b45309;
+  --level-high: #e11d48;
+  --success: #15803d;
+  --overlay: rgb(15 23 42 / 0.45);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1020;
+    --surface: #131a2e;
+    --surface-hover: #1b2440;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --border: #26304d;
+    --primary: #818cf8;
+    --primary-hover: #a5b4fc;
+    --primary-fg: #0b1020;
+    --primary-soft: #1e2347;
+    --danger: #fb7185;
+    --danger-soft: #3a1220;
+    --level-low: #2dd4bf;
+    --level-medium: #fbbf24;
+    --level-high: #fb7185;
+    --success: #4ade80;
+    --overlay: rgb(0 0 0 / 0.6);
+    color-scheme: dark;
+  }
+}
+
+/* The projector view is always dark: it is easier to read from the back of a lecture hall. */
+.theme-projector {
+  --bg: #070b16;
+  --surface: #10172b;
+  --surface-hover: #172038;
+  --text: #f1f5f9;
+  --muted: #a3b1c6;
+  --border: #233052;
+  --primary: #818cf8;
+  --primary-hover: #a5b4fc;
+  --primary-fg: #070b16;
+  --primary-soft: #1c2250;
+  --level-low: #2dd4bf;
+  --level-medium: #fbbf24;
+  --level-high: #fb7185;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: var(--font-plex-thai), ui-sans-serif, system-ui, sans-serif;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-fg: var(--primary-fg);
+  --color-primary-soft: var(--primary-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-level-low: var(--level-low);
+  --color-level-medium: var(--level-medium);
+  --color-level-high: var(--level-high);
+  --color-success: var(--success);
+  --color-overlay: var(--overlay);
+
+  --radius-card: 1rem;
+  --radius-control: 0.75rem;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    /* Thai stacks vowels and tone marks above and below the line, so it needs extra leading. */
+    line-height: 1.7;
+    text-rendering: optimizeLegibility;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  /* Thai has no spaces between words; let the browser's dictionary choose line breaks. */
+  h1,
+  h2,
+  h3,
+  p {
+    text-wrap: pretty;
+    line-break: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
