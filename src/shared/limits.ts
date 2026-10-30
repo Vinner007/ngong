@@ -26,6 +26,12 @@ export const ROOM_LIFETIME_MS = 24 * 60 * 60 * 1000
 /** The confusion meter only counts people who joined a topic in this window, so it reflects "right now". */
 export const CONFUSION_WINDOW_MS = 10 * 60 * 1000
 
+/**
+ * Below this many people in the room the projector does not show a percentage: with one
+ * student, a single question already reads as "100% confused", which says nothing useful.
+ */
+export const MIN_AUDIENCE_FOR_METER = 5
+
 /** Confusion meter bands, as a share of people online. */
 export const CONFUSION_MEDIUM_FROM = 0.25
 export const CONFUSION_HIGH_FROM = 0.5

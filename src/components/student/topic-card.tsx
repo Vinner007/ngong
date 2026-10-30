@@ -1,6 +1,7 @@
 "use client"
 
 import { Check, CircleCheck, Hand, ThumbsDown, ThumbsUp, Users } from "lucide-react"
+import { useState } from "react"
 import { cn } from "@/lib/cn"
 import type { Feedback, Membership, TopicSummary } from "@/shared/types"
 
@@ -27,8 +28,38 @@ export function TopicCard({
     )
   }
 
+  return (
+    <OpenTopicCard
+      topic={topic}
+      membership={membership}
+      busy={busy}
+      disabled={disabled}
+      onToggleMeToo={onToggleMeToo}
+    />
+  )
+}
+
+function OpenTopicCard({
+  topic,
+  membership,
+  busy,
+  disabled,
+  onToggleMeToo,
+}: Omit<TopicCardProps, "onFeedback">) {
+  // Each "ฉันก็งง" tap bumps `cheer`, which re-mounts the wave and the "+1" so they replay.
+  const [cheer, setCheer] = useState(0)
+  const [waving, setWaving] = useState(false)
+
   const joined = membership !== undefined
   const ownQuestion = membership?.via === "ask"
+
+  function handleClick() {
+    if (!joined) {
+      setCheer((count) => count + 1)
+      setWaving(true)
+    }
+    onToggleMeToo(topic)
+  }
 
   return (
     <li className="rounded-[var(--radius-card)] border border-border bg-surface p-4">
@@ -40,19 +71,40 @@ export function TopicCard({
         </span>
         <button
           type="button"
-          onClick={() => onToggleMeToo(topic)}
+          onClick={handleClick}
           disabled={busy || disabled || ownQuestion}
           aria-pressed={joined}
           className={cn(
-            "inline-flex min-h-11 items-center gap-2 rounded-full px-4 text-[15px] font-semibold transition-colors disabled:cursor-default",
+            "relative inline-flex min-h-11 items-center gap-2 rounded-full px-4 text-[15px] font-semibold transition-colors disabled:cursor-default",
             joined
               ? "bg-primary text-primary-fg"
               : "border border-border bg-bg text-text hover:bg-surface-hover",
             (busy || disabled) && "opacity-60",
           )}
         >
-          {joined ? <Check className="size-4" aria-hidden /> : <Hand className="size-4" aria-hidden />}
+          {waving ? (
+            <span
+              key={cheer}
+              className="inline-flex origin-[60%_90%] animate-wave"
+              onAnimationEnd={() => setWaving(false)}
+            >
+              <Hand className="size-4" aria-hidden />
+            </span>
+          ) : joined ? (
+            <Check className="size-4" aria-hidden />
+          ) : (
+            <Hand className="size-4" aria-hidden />
+          )}
           {ownQuestion ? "คุณถามเรื่องนี้" : joined ? "งงด้วย" : "ฉันก็งง"}
+          {cheer > 0 ? (
+            <span
+              key={`plus-${cheer}`}
+              aria-hidden
+              className="pointer-events-none absolute left-1/2 top-0 animate-float-up text-sm font-bold text-primary"
+            >
+              +1
+            </span>
+          ) : null}
         </button>
       </div>
     </li>

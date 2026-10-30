@@ -1,5 +1,6 @@
-import type { ConfusionLevel, ConfusionSummary } from "@/shared/types"
+import { LEVEL_FILL_CLASS, LEVEL_TEXT_CLASS } from "@/components/confusion-level"
 import { cn } from "@/lib/cn"
+import type { ConfusionLevel, ConfusionSummary } from "@/shared/types"
 
 const LEVEL_LABEL: Record<ConfusionLevel, string> = {
   low: "น้อย",
@@ -13,41 +14,20 @@ const LEVEL_HINT: Record<ConfusionLevel, string> = {
   high: "หลายคนงง ลองทวนหัวข้อที่คนงงเยอะสุด",
 }
 
-const LEVEL_TEXT: Record<ConfusionLevel, string> = {
-  low: "text-level-low",
-  medium: "text-level-medium",
-  high: "text-level-high",
-}
-
-const LEVEL_FILL: Record<ConfusionLevel, string> = {
-  low: "bg-level-low",
-  medium: "bg-level-medium",
-  high: "bg-level-high",
-}
-
-interface ConfusionMeterProps {
-  confusion: ConfusionSummary
-  size?: "md" | "xl"
-  showHint?: boolean
-}
-
-/** Level is shown three ways at once: colour, a word, and a percentage. */
-export function ConfusionMeter({ confusion, size = "md", showHint = true }: ConfusionMeterProps) {
+/** The host's meter. Level is shown three ways at once: colour, a word, and a percentage. */
+export function ConfusionMeter({ confusion }: { confusion: ConfusionSummary }) {
   const { level, percent, confusedPeople, online } = confusion
-  const isLarge = size === "xl"
 
   return (
     <section aria-label="ระดับความงงของห้อง">
       <div className="flex items-baseline justify-between gap-3">
-        <h2 className={cn("font-medium text-muted", isLarge ? "text-2xl" : "text-sm")}>
-          ระดับความงงตอนนี้
-        </h2>
-        <p className={cn("font-semibold tabular-nums", LEVEL_TEXT[level], isLarge ? "text-4xl" : "text-lg")}>
+        <h2 className="text-sm font-medium text-muted">ระดับความงงตอนนี้</h2>
+        <p className={cn("text-lg font-semibold tabular-nums", LEVEL_TEXT_CLASS[level])}>
           {LEVEL_LABEL[level]} {percent}%
         </p>
       </div>
       <div
-        className={cn("mt-2 overflow-hidden rounded-full bg-surface-hover", isLarge ? "h-5" : "h-3")}
+        className="mt-2 h-3 overflow-hidden rounded-full bg-surface-hover"
         role="meter"
         aria-valuemin={0}
         aria-valuemax={100}
@@ -55,13 +35,12 @@ export function ConfusionMeter({ confusion, size = "md", showHint = true }: Conf
         aria-valuetext={`${LEVEL_LABEL[level]} ${percent} เปอร์เซ็นต์`}
       >
         <div
-          className={cn("h-full rounded-full transition-[width] duration-500 ease-out", LEVEL_FILL[level])}
+          className={cn("h-full rounded-full transition-[width] duration-500 ease-out", LEVEL_FILL_CLASS[level])}
           style={{ width: `${Math.max(percent, 2)}%` }}
         />
       </div>
-      <p className={cn("mt-2 text-muted", isLarge ? "text-xl" : "text-sm")}>
-        {confusedPeople} จาก {online} คนงงอย่างน้อย 1 เรื่อง
-        {showHint ? ` · ${LEVEL_HINT[level]}` : ""}
+      <p className="mt-2 text-sm text-muted">
+        {confusedPeople} จาก {online} คนงงอย่างน้อย 1 เรื่อง · {LEVEL_HINT[level]}
       </p>
     </section>
   )

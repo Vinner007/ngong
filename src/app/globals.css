@@ -92,6 +92,73 @@
   --radius-control: 0.75rem;
 }
 
+/*
+ * Small CSS-only effects. The prefers-reduced-motion rule at the bottom of this file shortens
+ * all of them to a single instant frame, so nothing moves for people who opted out.
+ */
+@theme {
+  --animate-glow: glow 2.4s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.2s ease-in-out infinite;
+  --animate-wave: wave 0.7s ease-in-out;
+  --animate-float-up: float-up 0.9s ease-out forwards;
+
+  /* The hottest bubble breathes a halo in its own colour (set per bubble as --bubble-glow). */
+  @keyframes glow {
+    0%,
+    100% {
+      box-shadow: 0 0 18px 2px var(--bubble-glow);
+    }
+    50% {
+      box-shadow: 0 0 46px 10px var(--bubble-glow);
+    }
+  }
+
+  /* A light streak running across the meter bar when the room is very confused. */
+  @keyframes shimmer {
+    from {
+      transform: translateX(-120%);
+    }
+    to {
+      transform: translateX(320%);
+    }
+  }
+
+  /* The raised hand on "ฉันก็งง" gives a quick wave. */
+  @keyframes wave {
+    0%,
+    100% {
+      rotate: 0deg;
+    }
+    20% {
+      rotate: -22deg;
+    }
+    40% {
+      rotate: 16deg;
+    }
+    60% {
+      rotate: -10deg;
+    }
+    80% {
+      rotate: 6deg;
+    }
+  }
+
+  /* "+1" rising above the button and fading out. */
+  @keyframes float-up {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, 4px) scale(0.8);
+    }
+    20% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -30px) scale(1.05);
+    }
+  }
+}
+
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
