@@ -31,6 +31,10 @@
   "vars": {
     "ENVIRONMENT": "production"
   },
+  // Cloudflare creates the DNS record and certificate for this subdomain on deploy.
+  // thanachart.dev itself belongs to the portfolio site, so only the subdomain is used here.
+  "routes": [{ "pattern": "ngong.thanachart.dev", "custom_domain": true }],
+  // The workers.dev address stays on as a fallback link.
   "workers_dev": true,
   "preview_urls": false,
   "observability": {

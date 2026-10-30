@@ -1,7 +1,7 @@
 # สคริปต์สัมภาษณ์: งงตรงไหน
 
 ลิงก์ที่ต้องเตรียมไว้:
-- Live URL: https://ngong.thanachartzass.workers.dev
+- Live URL: https://ngong.thanachart.dev (สำรอง: https://ngong.thanachartzass.workers.dev)
 - GitHub: https://github.com/Vinner007/ngong
 - Tech stack: Next.js 16 · Cloudflare Workers + Durable Objects (SQLite, WebSocket) · Workers AI (bge-m3) · Claude Opus 5.5 · Tailwind 4 · zod · vitest
 

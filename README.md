@@ -5,7 +5,7 @@
 **ถามได้ ไม่ต้องยกมือ**
 ส่งความงงแบบไม่ระบุชื่อ แล้ว AI รวมเรื่องที่ทั้งห้องงงให้อาจารย์เห็นแบบเรียลไทม์
 
-**[Live Demo → ngong.thanachartzass.workers.dev](https://ngong.thanachartzass.workers.dev)**
+**[Live Demo → ngong.thanachart.dev](https://ngong.thanachart.dev)**
 
 [วิธีใช้](#วิธีใช้) · [Architecture](#architecture) · [Data Model](#data-model) · [ความปลอดภัย](#ความปลอดภัย) · [เริ่มต้นพัฒนา](#เริ่มต้นพัฒนา)
 
@@ -43,7 +43,7 @@
 - โหมด "จำลองห้องเรียน" สำหรับลองระบบโดยไม่ต้องมีนักศึกษาจริง
 
 ## วิธีใช้
-1. เปิด [ngong.thanachartzass.workers.dev](https://ngong.thanachartzass.workers.dev) แล้วกด **สร้างห้องสำหรับผู้สอน**
+1. เปิด [ngong.thanachart.dev](https://ngong.thanachart.dev) แล้วกด **สร้างห้องสำหรับผู้สอน**
 2. กด **เปิดบนจอโปรเจกเตอร์** บนโน้ตบุ๊ก แล้วให้นักศึกษาสแกน QR บนจอ
 3. นักศึกษาพิมพ์สิ่งที่งง bubble ของแต่ละหัวข้อจะโตขึ้นสดๆ
 4. ถ้าอยากลองคนเดียว ให้กดเมนู `⋯` → **จำลองห้องเรียน** ระบบจะทยอยส่งคำถามตัวอย่าง 30 ข้อ แล้วมีคนกด "ฉันก็งง" ตามมาอีก 14 ครั้ง
@@ -204,6 +204,7 @@ npx wrangler login
 npx wrangler secret put ANTHROPIC_API_KEY
 npm run deploy
 ```
+> ถ้า fork ไป deploy เอง ให้ลบ `account_id` และ `routes` (โดเมน `ngong.thanachart.dev`) ออกจาก `wrangler.jsonc` ก่อน ระบบจะใช้ที่อยู่ `*.workers.dev` ของบัญชีคุณแทน
 
 | Script | ทำอะไร |
 |---|---|
